@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+.gradient-kaito {
+  background: linear-gradient(140deg, #000000, #121212, #333333, #666666, #FFFFFF);
+  background-size: 240% 240%;
+  animation: gradient-animation 15s ease infinite alternate-reverse; /* меняем направление */
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.btns {
+  background-color: black;
+  margin: 10%;
+  height: 200px;
+  width: 200px;
+  color: white;
+  border-radius: 120px;
+  position: absolute;
+}
+
+.btns:hover {
+  background-color: violet;
+}

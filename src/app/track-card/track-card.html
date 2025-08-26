@@ -1,0 +1,82 @@
+<div class="backdrop-blur-md  border-white/20 rounded-xl p-4 sm:p-6 md:p-8 max-w-xs sm:max-w-sm md:max-w-md mx-auto text-center shadow-xl transition-all duration-300">
+  <!-- Изображение трека -->
+  <img src="https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/f1/70/5e/f1705e38-7485-b80e-2f20-2312beea1918/cover.jpg/800x800cc.jpg"
+       alt="Обложка трека"
+       class=" h-64 sm:w-56 sm:h-56 md:w-72 md:h-72 mx-auto rounded-lg shadow-md object-cover hover:scale-105 transition ease-linear"
+  />
+  <!-- Название трека -->
+  <h2 class="text-white font-semibold text-xl mt-4"> Дико, например (Safscale & Kaito Shoma Remix)</h2>
+  <!-- Автор трека -->
+  <p class="text-gray-400 sm:text-sm md:text-xl mt-1">Kaito Shoma</p>
+  <!-- Прогресс бар -->
+  <div
+    class="relative h-1.5 mt-4 bg-gray-700 rounded-full overflow-hidden cursor-pointer group"
+    (click)="onProgressClick($event)"
+  >
+  <div class="absolute inset-0 bg-gradient-to-r from-transparent via-gray-500/30 to-transparent animate-pulse"></div>
+    <div
+    class="h-full bg-gradient-to-r from-[#3c435c] to-[#b4b4b4] rounded-full transition-all duration-100 ease-out"
+    [style.width.%]="(currentTime / duration) * 100"
+    ></div>
+
+  </div>
+  <!-- время трека -->
+  <div class="flex justify-between text-xs text-gray-400 mt-3 px-2">
+    <span>{{ formatTime(currentTime) }}</span>
+    <span>{{ formatTime(duration)}}</span>
+  </div>
+  <div class="flex justify-center items-center gap-8 mt-6 sm:mt-6">
+    <!-- назад-->
+        <button class="text-white hover:text-gray-500 transition duration-150">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 sm:w-8 sm:h-8 " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="19 20 9 12 19 4 19 20"></polygon>
+            <line x1="5" y1="19" x2="5" y2="1">
+            </line>
+          </svg>
+        </button>
+    <!-- Пауза -->
+    <button class="text-white hover:text-gray-500 transition duration-150" (click)="togglePlay()">
+      @if (isPlaying) {
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="6" y="3" width="4" height="16"></rect>
+          <rect x="14" y="5" width="4" height="16"></rect>
+        </svg>
+      } @else {
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 transition" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+      }
+      <!-- Вперед -->
+    </button>
+    <button class="text-white hover:text-gray-500 transition duration-150">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 sm:w-8 sm:h-8 " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="5 4 15 12 5 20 5 4">
+        </polygon>
+        <line x1="19" y1="6" x2="19" y2="22">
+        </line>
+      </svg>
+    </button>
+  </div>
+  <div class="text-white flex items-center gap-2 mt-4 px-2 ">
+    @if (volume > 0.5) {
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" >
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5">
+        </polygon>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+      </svg>
+    } @else if (volume > 0 && volume <= 0.5) {
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-volume-1"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+    } @else if (volume == 0) {
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-volume-x"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+    }
+    <input
+      type="range"
+      min="0"
+      max="1"
+      step="0.001"
+      class="w-full accent-[#938e94] hover:scale-105  transition ease-in "
+      [value]="volume"
+      (input)="toggleVolume($event)"
+    >
+  </div>
+</div>
