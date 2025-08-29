@@ -5,7 +5,7 @@ import {TrackCard} from './track-card/track-card';
 
 @Component({
   selector: 'app-root',
-  imports: [TrackCard],
+  imports: [TrackCard, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

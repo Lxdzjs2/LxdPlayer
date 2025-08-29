@@ -1,4 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AuthService} from '../services/auth-service';
 
 
 @Component({
@@ -8,6 +9,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
   styleUrl: './track-card.css'
 })
 export class TrackCard implements OnInit {
+
+
   trackUrl = 'assets/tracks/phara_kaito.mp3';
   isPlaying: boolean = false;
   audio = new Audio(this.trackUrl);
@@ -49,7 +52,6 @@ export class TrackCard implements OnInit {
 
   saveProgress() {
     localStorage.setItem("currentTime", this.currentTime.toString())
-    console.log('✅ Сохранено в localStorage:', this.currentTime);
   }
 
   loadProgress() {
